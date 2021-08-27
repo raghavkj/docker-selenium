@@ -14,7 +14,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 //bat
-                sh 'docker build -t raghavkjdocker/selenium-docker:firstimage .'
+                sh 'docker build -t raghavkj/selenium-docker:latest .'
             }
         }
         stage('Login') {
@@ -24,8 +24,7 @@ pipeline {
         }
         stage('Push Image') {
             steps {
-                sh 'docker tag firstimage raghavkjdocker/selenium-docker:firstimage'
-                sh 'docker push raghavkjdocker/selenium-docker:firstimage'
+                sh 'docker push raghavkj/selenium-docker:latest'
             }
         }
     }
