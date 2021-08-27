@@ -27,10 +27,10 @@ pipeline {
                 sh 'docker push raghavkjdocker/selenium-docker:latest'
             }
         }
-        post {
-            always {
-                sh 'docker logout'
-            }
+    }
+    post {
+        always {
+            sh 'docker logout'
         }
     }
 }
