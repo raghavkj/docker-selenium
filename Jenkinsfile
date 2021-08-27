@@ -11,6 +11,7 @@ pipeline {
         environment {
           DOCKERHUB_CREDENTIALS = credentials('dockerhub')
         }
+
         stage('Build Image') {
             steps {
                 //bat
@@ -23,10 +24,9 @@ pipeline {
           }
         }
         stage('Push Image') {
-            steps {
-			        sh 'docker push raghavkjdocker/selenium-docker:latest'
-			    }                           
-            }
+          steps {
+			sh 'docker push raghavkjdocker/selenium-docker:latest'
+		  }
         }
         post{
           always {
