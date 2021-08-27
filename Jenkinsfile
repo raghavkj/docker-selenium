@@ -9,9 +9,8 @@ pipeline {
             }
         }
         environment {
-          DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+            DOCKERHUB_CREDENTIALS = credentials('dockerhub')
         }
-
         stage('Build Image') {
             steps {
                 //bat
@@ -19,19 +18,19 @@ pipeline {
             }
         }
         stage('Login') {
-          steps{
-            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          }
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
         }
         stage('Push Image') {
-          steps {
-			sh 'docker push raghavkjdocker/selenium-docker:latest'
-		  }
+            steps {
+                sh 'docker push raghavkjdocker/selenium-docker:latest'
+            }
         }
         post {
-          always {
-            sh 'docker logout'
-          }
+            always {
+                sh 'docker logout'
+            }
         }
     }
-  }
+}
