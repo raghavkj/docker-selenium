@@ -1,15 +1,15 @@
 pipeline {
     // master executor should be set to 0
     agent any
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    }
     stages {
         stage('Build Jar') {
             steps {
                 //bat
                 sh "mvn clean package -DskipTests"
             }
-        }
-        environment {
-            DOCKERHUB_CREDENTIALS = credentials('dockerhub')
         }
         stage('Build Image') {
             steps {
