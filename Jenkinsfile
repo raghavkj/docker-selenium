@@ -8,20 +8,30 @@ pipeline {
                 sh "mvn clean package -DskipTests"
             }
         }
+        environment {
+          DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        }
         stage('Build Image') {
             steps {
                 //bat
-                sh "docker build -t='raghavkjdocker/selenium-docker' ."
+                sh 'docker build -t raghavkjdocker/selenium-docker:latest .'
             }
+        }
+        stage('Login') {
+          steps{
+            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+          }
         }
         stage('Push Image') {
             steps {
-			    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                    //bat
-			        sh "docker login --username=${user} --password=${pass}"
-			        sh "docker push raghavkjdocker/selenium-docker:latest"
+			        sh 'docker push raghavkjdocker/selenium-docker:latest'
 			    }                           
             }
+        }
+        post{
+          always {
+            sh 'docker logout'
+          }
         }
     }
 }
