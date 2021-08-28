@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                //bat - for windows
+                //bat - for windows , sh - for Mac
                 sh "docker build -t='raghavkj/selenium-docker' ."
             }
         }
