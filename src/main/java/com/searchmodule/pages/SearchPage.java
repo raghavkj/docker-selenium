@@ -51,7 +51,7 @@ public class SearchPage {
     public int getResult(){
         By by = By.className("tile--vid");
         this.wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(by,0));
-        System.out.println(this.allVideos.size());
+        System.out.println("The number of videos displayed *****>"+this.allVideos.size());
         return this.allVideos.size();
     }
 }

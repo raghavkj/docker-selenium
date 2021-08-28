@@ -33,7 +33,7 @@ public class FlightConfirmationPage {
     public String getPrice() {
         this.wait.until(ExpectedConditions.visibilityOf(flightConfirmationHeader));
         System.out.println(this.flightConfirmationHeader.getText());
-        System.out.println(this.prices.get(1).getText());
+        System.out.println("The price of the flight --->"+this.prices.get(1).getText());
         String price = this.prices.get(1).getText();
         this.signOffLink.click();
         return price;
